@@ -3,6 +3,8 @@ package com.dvivanco.springboot.apirest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,59 +14,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dvivanco.springboot.apirest.dao.HotelRepository;
-import com.dvivanco.springboot.apirest.exception.EntityNotFoundException;
-import com.dvivanco.springboot.apirest.model.Hotel;
+import com.dvivanco.springboot.apirest.models.dto.HotelDTO;
+import com.dvivanco.springboot.apirest.models.service.IHotelService;
 
 @CrossOrigin( origins = {"http://localhost:4200"} )
 @RestController
-@RequestMapping("/api")
+@RequestMapping( value = "/api", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class HotelController {
 	
 	@Autowired
-	private HotelRepository hotelrepository;
+	private IHotelService hotelService;
 	
-	@PostMapping("/saveHotel")
-	public Hotel saveHotel(@RequestBody Hotel hotel ) {
-		hotelrepository.save(hotel);
-		return hotelrepository.findById(hotel.getId()).orElseThrow(() -> new EntityNotFoundException("Hotel", "id", hotel.getId()));
+	@GetMapping("/hoteles")
+	public List<HotelDTO> getAllItems(){
+		return hotelService.getAllItems();
 	}
 	
-	@GetMapping("/getAllHotels")
-	public List<Hotel> getAllHotels(){
-		return hotelrepository.findAll();
+	@GetMapping("/hoteles/{id}")
+	public HotelDTO getItemById(@PathVariable Long id) {
+		return hotelService.getItemById(id);
 	}
 	
-	@GetMapping("/getHotel/{id}")
-	public Hotel getHotelById(@PathVariable Long id) {
-		return hotelrepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel", "id", id));
+	@PostMapping("/hoteles")
+	@ResponseStatus(HttpStatus.CREATED)
+	public HotelDTO saveItem(@RequestBody HotelDTO hotel ) {
+		return hotelService.saveItem(hotel);
 	}
-	
-	@PutMapping("/updateHotel/{id}")
-	public Hotel updateHotelById(@PathVariable Long id, @RequestBody Hotel hotel) {
-		
-		Hotel hotelFound = hotelrepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel", "id", id));;
-		
-		hotelFound.setNombre(hotel.getNombre());
-		hotelFound.setTipo(hotel.getTipo());
-		hotelFound.setCadena(hotel.getCadena());
-		hotelFound.setZona(hotel.getCadena());
-		hotelFound.setCodigoOficina(hotel.getCodigoOficina());
-		hotelFound.setActivo(hotel.getActivo());
-		
-		Hotel hotelUpdated = hotelrepository.save(hotelFound);
 
-		return hotelUpdated;	
+	@PutMapping("/hoteles/{id}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public HotelDTO updateItemById(@PathVariable Long id, @RequestBody HotelDTO hotel) {
+		return hotelService.updateItemById(id, hotel);	
 	}
 	
-	@DeleteMapping("/deleteHotel/{id}")
-	public ResponseEntity<?> deleteHotelById(@PathVariable Long id) {
-		
-		Hotel hotelFound = hotelrepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel", "id", id));;
-		hotelrepository.delete(hotelFound);
-
-		return ResponseEntity.ok().build();	
+	@DeleteMapping("/hoteles/{id}")
+	public ResponseEntity<HotelDTO> deleteItemById(@PathVariable Long id) {
+		return hotelService.delete(id);	
 	}
 }

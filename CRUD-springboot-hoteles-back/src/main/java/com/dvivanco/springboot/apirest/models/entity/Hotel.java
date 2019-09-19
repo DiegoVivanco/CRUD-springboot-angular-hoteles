@@ -1,4 +1,4 @@
-package com.dvivanco.springboot.apirest.model;
+package com.dvivanco.springboot.apirest.models.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,14 +7,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
+import com.dvivanco.springboot.apirest.models.dto.HotelDTO;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Hotel {
 	
 	@Id
@@ -36,9 +34,24 @@ public class Hotel {
 	
 	@NotBlank
 	@Size( max = 15)
-	private String codigoOficina;
+	private String codigoficina;
 	
 	@NotBlank
 	@Size( max = 1)
 	private String activo;
+	
+	public HotelDTO entityToHotelDTO() {
+		
+		HotelDTO dto = new HotelDTO();
+		 
+		dto.setId(this.id);
+		dto.setNombre(this.nombre);
+		dto.setTipo(this.tipo);
+		dto.setCadena(this.cadena);
+		dto.setZona(this.zona);
+		dto.setCodigoficina(this.codigoficina);
+		dto.setActivo(this.activo);
+		 
+		return dto;
+	}
 }
