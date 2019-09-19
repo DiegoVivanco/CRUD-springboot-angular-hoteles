@@ -75,7 +75,7 @@ export class HotelComponent implements OnInit {
       },
       err => {
         this.generarMensajesCRUD(TYPE_MSG_ERROR, ERROR_GETLIST);
-        console.log('getHotelList(). Error al obtener datos: ' + JSON.stringify(err));
+        console.log('getAllItems(). Error al obtener datos: ' + JSON.stringify(err));
       }
     );
   }
@@ -97,7 +97,7 @@ export class HotelComponent implements OnInit {
         },
         err => {
           this.generarMensajesCRUD(TYPE_MSG_ERROR);
-          console.log('save(). Error insertando datos: ' + JSON.stringify(err));
+          console.log('saveItem(). Error insertando datos: ' + JSON.stringify(err));
         }
       );
     } else {
@@ -112,7 +112,7 @@ export class HotelComponent implements OnInit {
         },
         err => {
           this.generarMensajesCRUD(TYPE_MSG_ERROR);
-          console.log('save(). Error actualizando datos: ' + JSON.stringify(err));
+          console.log('updateItemById(). Error actualizando datos: ' + JSON.stringify(err));
         }
       );
     }
@@ -134,7 +134,7 @@ export class HotelComponent implements OnInit {
       },
       err => {
         this.generarMensajesCRUD(TYPE_MSG_ERROR);
-        console.log('delete(). Error borrando datos: ' + JSON.stringify(err));
+        console.log('deleteItemById(). Error borrando datos: ' + JSON.stringify(err));
       },
       () => {
         this.hotel = this.initHotelObject();
@@ -159,7 +159,7 @@ export class HotelComponent implements OnInit {
       },
       err => {
         this.generarMensajesCRUD(TYPE_MSG_ERROR);
-        console.log('onRowSelect(). Error al obtener datos: ' + JSON.stringify(err));
+        console.log('getItemById(). Error al obtener datos: ' + JSON.stringify(err));
       }
     );
 

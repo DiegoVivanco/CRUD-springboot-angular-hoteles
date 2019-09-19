@@ -14,22 +14,22 @@ export class HotelService {
   constructor(private http: HttpClient) {}
 
   getHotels(): Observable<Hotel[]> {
-    return this.http.get(`${this.urlEndPoint}/getAllHotels`).pipe(map(response => response as Hotel[]));
+    return this.http.get(`${this.urlEndPoint}/hoteles`).pipe(map(response => response as Hotel[]));
   }
 
   createHotel(hotel: Hotel): Observable<Hotel> {
-    return this.http.post<Hotel>(`${this.urlEndPoint}/saveHotel`, hotel, { headers: this.httpHeaders });
+    return this.http.post<Hotel>(`${this.urlEndPoint}/hoteles`, hotel, { headers: this.httpHeaders });
   }
 
   getHotel(id: number): Observable<Hotel> {
-    return this.http.get<Hotel>(`${this.urlEndPoint}/getHotel/${id}`);
+    return this.http.get<Hotel>(`${this.urlEndPoint}/hoteles/${id}`);
   }
 
   updateHotel(hotel: Hotel): Observable<Hotel> {
-    return this.http.put<Hotel>(`${this.urlEndPoint}/updateHotel/${hotel.id}`, hotel, { headers: this.httpHeaders });
+    return this.http.put<Hotel>(`${this.urlEndPoint}/hoteles/${hotel.id}`, hotel, { headers: this.httpHeaders });
   }
 
   deleteHotel(id: number): Observable<Hotel> {
-    return this.http.delete<Hotel>(`${this.urlEndPoint}/deleteHotel/${id}`, { headers: this.httpHeaders });
+    return this.http.delete<Hotel>(`${this.urlEndPoint}/hoteles/${id}`, { headers: this.httpHeaders });
   }
 }

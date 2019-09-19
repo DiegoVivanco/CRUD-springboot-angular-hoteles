@@ -40,7 +40,7 @@ export class CommonStaticService {
       { field: 'tipo', header: 'Tipo' },
       { field: 'cadena', header: 'Cadena' },
       { field: 'zona', header: 'Zona' },
-      { field: 'codigoOficina', header: 'Código Oficina' },
+      { field: 'codigoficina', header: 'Código Oficina' },
       { field: 'activo', header: 'Activo' }
     ];
 

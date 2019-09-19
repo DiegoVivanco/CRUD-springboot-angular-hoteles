@@ -81,10 +81,10 @@
     <div class="ui-g-12 padding-0">
       <div class="ui-g-6">
         <div class="ui-g-4">
-          <label for="codigoOficina">Código Oficina <strong>*</strong></label>
+          <label for="codigoficina">Código Oficina <strong>*</strong></label>
         </div>
         <div class="ui-g-8">
-          <input pInputText id="codigoOficina" [(ngModel)]="hotel.codigoOficina" />
+          <input pInputText id="codigoficina" [(ngModel)]="hotel.codigoficina" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <span style="float: left;">Los campos con <strong>*</strong> son obligatorios</span>
       <button *ngIf="!newHotel" type="button" class="delete-button" pButton icon="pi pi-times" (click)="delete()" label="Eliminar"></button>
-      <button type="button" class="add-button" [disabled]="(!hotel.nombre || !hotel.codigoOficina)" pButton icon="pi pi-check" (click)="save()" label="Guardar"></button>
+      <button type="button" class="add-button" [disabled]="(!hotel.nombre || !hotel.codigoficina)" pButton icon="pi pi-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>
 </p-dialog>

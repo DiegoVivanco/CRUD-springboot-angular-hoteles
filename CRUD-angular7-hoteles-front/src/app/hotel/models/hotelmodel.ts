@@ -4,12 +4,12 @@ export class Hotel {
     tipo: string;
     cadena: string;
     zona: string;
-    codigoOficina: string;
+    codigoficina: string;
     activo: string;
 
-    constructor(nombre: string, codigoOficina: string, activo: string) {
+    constructor(nombre: string, codigoficina: string, activo: string) {
         this.nombre = nombre;
-        this.codigoOficina = codigoOficina;
+        this.codigoficina = codigoficina;
         this.activo = activo;
     }
 }
