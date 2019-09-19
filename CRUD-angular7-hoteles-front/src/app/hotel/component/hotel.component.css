@@ -1,0 +1,33 @@
+.text-center {
+    text-align: center;
+}
+
+.hotel-activo {
+    color: green;
+}
+
+.hotel-no-activo {
+    color: red;
+}
+
+.delete-button {
+    background: #dc143c;
+}
+
+.delete-button:hover {
+    background: #8b0000 !important;    
+}    
+
+.delete-button,
+.add-button {
+    outline: 0;
+    border: none !important
+}
+
+.ui-button:enabled:focus {
+    box-shadow: none !important;
+}
+
+.ui-dialog-resizable .ui-dialog-content {
+    overflow: unset !important;
+}

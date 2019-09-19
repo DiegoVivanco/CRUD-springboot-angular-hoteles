@@ -1,0 +1,108 @@
+<p-toast></p-toast>
+
+<p-table
+  [columns]="cols"
+  [value]="hotels"
+  selectionMode="single"
+  [(selection)]="selectedHotel"
+  (onRowSelect)="onRowSelect($event)"
+  [paginator]="true"
+  [rows]="15"
+>
+  <ng-template pTemplate="caption">
+    <div style="text-align:right">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Añadir nuevo Hotel"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <ng-container *ngFor="let col of columns">
+          <th  [pSortableColumn]="col.field" *ngIf="col.field !== 'id'">
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <ng-container *ngFor="let col of columns">
+        <td *ngIf="col.field !== 'id'">
+          <div class="text-center" *ngIf="col.field === 'activo'; else elseBlock">
+            <i class="pi pi-circle-on" [ngClass]="rowData[col.field] == 'S' ? 'hotel-activo' : 'hotel-no-activo'"></i>
+          </div>
+          <ng-template #elseBlock>{{ rowData[col.field] }}</ng-template>
+        </td>
+      </ng-container>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Formulario Hotel" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{ width: '60%' }">
+  <div class="ui-g ui-fluid" *ngIf="hotel">
+    <div class="ui-g-12 padding-0">
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="nombre">Nombre <strong>*</strong></label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="nombre" [(ngModel)]="hotel.nombre" />
+        </div>
+      </div>
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="tipo">Tipo</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="tipoHoteles" [(ngModel)]="hotel.tipo"></p-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 padding-0">
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="cadena">Cadena</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="cadena" [(ngModel)]="hotel.cadena" />
+        </div>
+      </div>
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="zona">Zona</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="zona" [(ngModel)]="hotel.zona" />
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 padding-0">
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="codigoOficina">Código Oficina <strong>*</strong></label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="codigoOficina" [(ngModel)]="hotel.codigoOficina" />
+        </div>
+      </div>
+
+      <div class="ui-g-6">
+        <div class="ui-g-4">
+          <label for="activo">Activo <strong>*</strong></label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="opcionesActivo" [(ngModel)]="hotel.activo"></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <span style="float: left;">Los campos con <strong>*</strong> son obligatorios</span>
+      <button *ngIf="!newHotel" type="button" class="delete-button" pButton icon="pi pi-times" (click)="delete()" label="Eliminar"></button>
+      <button type="button" class="add-button" [disabled]="(!hotel.nombre || !hotel.codigoOficina)" pButton icon="pi pi-check" (click)="save()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>
