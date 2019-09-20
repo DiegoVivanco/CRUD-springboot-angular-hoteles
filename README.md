@@ -1,17 +1,16 @@
  **CRUD SpringBoot Angular Hoteles**
 ====================================
-----------
 
 ###**Aplicación REST con métodos CRUD y BBDD en memoria.**
 
 **FRONT**
-Framework: **Angular 7+**
-URL base : http://localhost:4200
+- Framework: **Angular 7+**
+- URL base : http://localhost:4200
 
 **BACK**
-Framework: **Spring**
-BBDD: **H2 database**
-URL base : http://localhost:8080
+- Framework: **Spring**
+- BBDD: **H2 database**
+- URL base : http://localhost:8080
 
 
 ### <i class="icon-folder"></i> Proyecto FRONT
