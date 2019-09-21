@@ -2,6 +2,7 @@ package com.dvivanco.springboot.apirest.models.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,11 @@ public class HotelServiceImpl implements IHotelService {
 	@Transactional(readOnly = true)
 	public List<HotelDTO> getAllItems() {
 		
-		List<HotelDTO> hotelesDTO = new ArrayList<>();
-		List<Hotel> hoteles = hotelDao.findAll();
+		List<HotelDTO> hotelsDTO = new ArrayList<>();
+		List<Hotel> hotels = hotelDao.findAll();
 		
-		for (Hotel hotel : hoteles) {
-			hotelesDTO.add(hotel.entityToHotelDTO());
-		}
-	
-		return hotelesDTO;
+		hotelsDTO.addAll(hotels.stream().map(Hotel::entityToHotelDTO).collect(Collectors.toList()));
+		return hotelsDTO;
 	}
 
 	@Override
