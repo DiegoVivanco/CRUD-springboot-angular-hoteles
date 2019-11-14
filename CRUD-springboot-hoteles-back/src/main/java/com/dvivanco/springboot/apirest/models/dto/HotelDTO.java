@@ -3,12 +3,14 @@ package com.dvivanco.springboot.apirest.models.dto;
 import com.dvivanco.springboot.apirest.models.entity.Hotel;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HotelDTO {
 	
 	private Long id;
