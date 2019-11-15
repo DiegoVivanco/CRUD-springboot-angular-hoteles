@@ -3,15 +3,21 @@ package com.dvivanco.springboot.apirest.models.service;
 import com.dvivanco.springboot.apirest.controller.HotelController;
 import com.dvivanco.springboot.apirest.models.dto.HotelDTO;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class HotelServiceImplTest {
+
     @InjectMocks
     private HotelController hotelController;
 
@@ -57,7 +63,7 @@ public class HotelServiceImplTest {
 
     @Test
     public void testDeleteItemById() {
-        hotelService.delete(3L);
+        hotelService.delete(2L);
         List<HotelDTO> hotelDTOListResult = hotelService.getAllItems();
         assertEquals(hotelDTOListResult.size(), 2);
     }
